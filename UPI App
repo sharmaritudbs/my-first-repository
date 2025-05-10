@@ -1,0 +1,28 @@
+from flask import Flask, request, jsonify
+import requests
+
+app = Flask(__name__)
+
+UPI_PROVIDER_API = "https://your-upi-provider.com/initiate-payment"  # Replace with actual API
+
+@app.route('/pay', methods=['POST'])
+def initiate_payment():
+    data = request.json
+    payload = {
+        "vpa": data["vpa"],  # User's UPI ID
+        "amount": data["amount"],
+        "txn_ref": data["txn_ref"],
+        "merchant_id": "your_merchant_id"  # Replace with actual merchant ID
+    }
+    
+    headers = {
+        "Authorization": "Bearer your_api_key",  # Replace with actual API key
+        "Content-Type": "application/json"
+    }
+
+    response = requests.post(UPI_PROVIDER_API, json=payload, headers=headers)
+    
+    return jsonify(response.json())
+
+if __name__ == '__main__':
+    app.run(debug=True)
