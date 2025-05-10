@@ -1,0 +1,9 @@
+import statistics
+
+# Sample data
+numbers = [10, 20, 30, 40, 50]
+
+# Calculate mean
+mean_value = statistics.mean(numbers)
+
+print(f"The mean of the numbers is: {mean_value}")
